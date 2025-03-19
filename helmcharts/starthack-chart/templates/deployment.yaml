@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ .Release.Name }}-deployment"
+  name: "app-deployment"
   labels:
-    app: {{ .Chart.Name }}
+    app: starthack
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: starthack
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: starthack
     spec:
       containers:
       - name: nginx
