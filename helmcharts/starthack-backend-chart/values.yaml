@@ -1,11 +1,16 @@
-replicaCount: 2
-image:
-  repository: nginx
-  tag: "latest"
-  pullPolicy: IfNotPresent
+namespace: starthack-test
+env: test
+name: starthack-api
+replicaCount: 1
+image: 046776365295.dkr.ecr.eu-central-1.amazonaws.com/starthack-test/api:0.1.0
+cpus: 1
+port: 8000
 
-service:
-  type: ClusterIP
-  port: 80
+awsSecretName: aws-secret-test
+clusterIssuer: letsencrypt-test
+domain: helvetai-test.dataplumbers.ch
 
-resources: {}
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 1
+  averageUtilization: 50

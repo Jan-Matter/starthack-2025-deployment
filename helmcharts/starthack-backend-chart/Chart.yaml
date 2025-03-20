@@ -1,5 +1,5 @@
 apiVersion: v2
-name: starthack-chart
-description: Helm chart for Start Hack 2025
+name: starthack-backend-chart
+description: Helm chart for Start Hack 2025 Backend
 version: 0.1.0
 appVersion: 1.0.0

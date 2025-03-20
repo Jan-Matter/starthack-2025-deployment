@@ -1,22 +1,64 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "app-deployment"
+  name: {{ .Values.name }}
   labels:
-    app: starthack
+    app: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: starthack
+      app: {{ .Values.name }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 50%
   template:
     metadata:
       labels:
-        app: starthack
+        app: {{ .Values.name }}
     spec:
       containers:
-      - name: nginx
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - name: {{ .Values.name }}
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.port }}
+        env:
+          - name: ENV
+            value: {{ .Values.env }}
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.awsSecretName }}
+                key: AWS_ACCESS_KEY_ID
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.awsSecretName }}
+                key: AWS_SECRET_ACCESS_KEY
+        resources:
+          requests:
+            cpu: {{ .Values.cpus }}
+        readinessProbe:
+          httpGet:
+            path: /api/v1/healthy
+            port: {{ .Values.port }}
+          initialDelaySeconds: 100
+          periodSeconds: 10
+          failureThreshold: 5
+        livenessProbe:
+          httpGet:
+            path: /api/v1/healthy
+            port: {{ .Values.port }}
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          failureThreshold: 10
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 3000
+          allowPrivilegeEscalation: false
+      imagePullSecrets:
+        - name: ecr-secret-test
