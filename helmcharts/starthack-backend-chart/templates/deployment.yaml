@@ -61,4 +61,4 @@ spec:
           runAsGroup: 3000
           allowPrivilegeEscalation: false
       imagePullSecrets:
-        - name: ecr-secret-test
+        - name: ecr-secret-prod

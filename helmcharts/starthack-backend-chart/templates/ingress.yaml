@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: starthack-api-ingress-test
+  name: starthack-api-ingress-prod
   namespace: {{ .Values.namespace }}
   annotations:
     cert-manager.io/cluster-issuer: {{ .Values.clusterIssuer }}
@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.domain }}
-    secretName: tls-secret-test
+    secretName: tls-secret-prod
   rules:
   - host: {{ .Values.domain }}
     http:
