@@ -8,7 +8,7 @@ port: 8000
 
 awsSecretName: aws-secret-prod
 clusterIssuer: letsencrypt-prod
-domain: helvetai-prod.dataplumbers.ch
+domain: helvetai.dataplumbers.ch
 
 autoscaling:
   minReplicas: 2
