@@ -1,0 +1,15 @@
+namespace: starthack-prod
+env: prod
+name: starthack-n8n
+replicaCount: 1
+image: docker.n8n.io/n8nio/n8n
+cpus: 1
+port: 5678
+
+clusterIssuer: letsencrypt-prod
+domain: helvetai-ui.dataplumbers.ch
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 10
+  averageUtilization: 50
