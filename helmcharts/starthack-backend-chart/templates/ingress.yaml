@@ -10,7 +10,7 @@ spec:
   tls:
   - hosts:
     - {{ .Values.domain }}
-    secretName: tls-secret-prod-hqnb8
+    secretName: tls-secret-prod
   rules:
   - host: {{ .Values.domain }}
     http:
