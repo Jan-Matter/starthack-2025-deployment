@@ -2,7 +2,7 @@ namespace: starthack-test
 env: test
 name: starthack-api
 replicaCount: 1
-image: 046776365295.dkr.ecr.eu-central-1.amazonaws.com/starthack-test/api:c420533a14b6aff511155d4be600e0708ffa0994
+image: 046776365295.dkr.ecr.eu-central-1.amazonaws.com/starthack-test/api:62e8257879c6113da5290ff1ca7278153bbd7283
 cpus: 0
 port: 8000
 
